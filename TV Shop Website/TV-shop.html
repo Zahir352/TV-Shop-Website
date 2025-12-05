@@ -175,12 +175,22 @@
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
     }
 
+    /* 🔹 HERO TV WITH REAL IMAGE */
     .hero-tv-screen {
-      background: radial-gradient(circle at 20% 20%, #38bdf8, #1d4ed8, #111827);
-      height: 200px;
-      border-radius: 18px;
-      position: relative;
+      height: 260px;
+      width: 100%;
+      border-radius: 20px;
       overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+      position: relative;
+      background: #020617;
+    }
+
+    .hero-tv-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .hero-tv-screen::after {
@@ -189,17 +199,19 @@
       bottom: 12px;
       right: 12px;
       font-size: 0.8rem;
-      padding: 4px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      letter-spacing: 0.5px;
     }
 
     .hero-tv-stand {
-      width: 90%;
+      width: 75%;
       height: 8px;
       background: #020617;
-      margin: 12px auto 0 auto;
+      margin: 16px auto 0 auto;
       border-radius: 999px;
     }
 
@@ -264,11 +276,12 @@
     }
 
     .product-image {
-      background: linear-gradient(135deg, #e5e7eb, #cbd5f5);
+      background: #111;
       height: 120px;
       border-radius: 12px;
       margin-bottom: 12px;
       position: relative;
+      overflow: hidden;
     }
 
     .product-image::after {
@@ -281,6 +294,14 @@
       color: #fff;
       padding: 2px 6px;
       border-radius: 999px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
     }
 
     .product-title {
@@ -483,7 +504,10 @@
       </div>
 
       <div class="hero-image-box">
-        <div class="hero-tv-screen"></div>
+        <div class="hero-tv-screen">
+          <!-- 🔹 your UHD image here -->
+          <img src="images/hero-tv.jpeg" alt="4K Ultra HD Television">
+        </div>
         <div class="hero-tv-stand"></div>
       </div>
     </div>
@@ -506,15 +530,15 @@
 
     <!-- Product Grid -->
     <div class="product-grid" id="product-grid">
-      <!-- Product 1 -->
-      <div
-        class="product-card"
-        data-category="4k smart"
-        data-name="Samsung 55&quot; Crystal 4K UHD Smart TV"
-        data-price="54999"
-      >
+
+      <!-- Product 1 – Samsung 4K -->
+      <div class="product-card" data-category="4k smart"
+           data-name="Samsung 55&quot; Crystal 4K UHD Smart TV"
+           data-price="54999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/samsung-4k.jpeg" alt="Samsung 4K TV">
+          </div>
           <h3 class="product-title">Samsung 55&quot; Crystal 4K UHD Smart TV</h3>
           <p class="product-spec">4K UHD • 55&quot; • Tizen OS • 3 HDMI</p>
         </div>
@@ -530,15 +554,14 @@
         </div>
       </div>
 
-      <!-- Product 2 -->
-      <div
-        class="product-card"
-        data-category="4k smart oled"
-        data-name="LG 65&quot; 4K OLED evo Smart TV"
-        data-price="129999"
-      >
+      <!-- Product 2 – LG OLED -->
+      <div class="product-card" data-category="4k smart oled"
+           data-name="LG 65&quot; 4K OLED evo Smart TV"
+           data-price="129999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/lg-oled.jpeg" alt="LG OLED TV">
+          </div>
           <h3 class="product-title">LG 65&quot; 4K OLED evo Smart TV</h3>
           <p class="product-spec">OLED • 65&quot; • webOS • Dolby Vision &amp; Atmos</p>
         </div>
@@ -554,15 +577,14 @@
         </div>
       </div>
 
-      <!-- Product 3 -->
-      <div
-        class="product-card"
-        data-category="smart budget"
-        data-name="Xiaomi 43&quot; Full HD Android Smart TV"
-        data-price="24999"
-      >
+      <!-- Product 3 – Xiaomi Smart TV -->
+      <div class="product-card" data-category="smart budget"
+           data-name="Xiaomi 43&quot; Full HD Android Smart TV"
+           data-price="24999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/xiaomi-android.jpeg" alt="Xiaomi Android TV">
+          </div>
           <h3 class="product-title">Xiaomi 43&quot; Full HD Android Smart TV</h3>
           <p class="product-spec">Full HD • 43&quot; • Android TV • Chromecast</p>
         </div>
@@ -578,15 +600,14 @@
         </div>
       </div>
 
-      <!-- Product 4 -->
-      <div
-        class="product-card"
-        data-category="budget"
-        data-name="OnePlus 32&quot; HD Ready LED TV"
-        data-price="15999"
-      >
+      <!-- Product 4 – OnePlus LED -->
+      <div class="product-card" data-category="budget"
+           data-name="OnePlus 32&quot; HD Ready LED TV"
+           data-price="15999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/oneplus-led.jpeg" alt="OnePlus LED TV">
+          </div>
           <h3 class="product-title">OnePlus 32&quot; HD Ready LED TV</h3>
           <p class="product-spec">HD Ready • 32&quot; • Bezel-less • 20W Speakers</p>
         </div>
@@ -602,15 +623,14 @@
         </div>
       </div>
 
-      <!-- Product 5 -->
-      <div
-        class="product-card"
-        data-category="4k smart"
-        data-name="Sony 50&quot; 4K HDR Google TV"
-        data-price="77999"
-      >
+      <!-- Product 5 – Sony Google TV -->
+      <div class="product-card" data-category="4k smart"
+           data-name="Sony 50&quot; 4K HDR Google TV"
+           data-price="77999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/sony-google.jpeg" alt="Sony 4K Google TV">
+          </div>
           <h3 class="product-title">Sony 50&quot; 4K HDR Google TV</h3>
           <p class="product-spec">4K HDR • 50&quot; • Google TV • X1 Processor</p>
         </div>
@@ -626,15 +646,14 @@
         </div>
       </div>
 
-      <!-- Product 6 -->
-      <div
-        class="product-card"
-        data-category="smart budget"
-        data-name="Realme 40&quot; Full HD Smart TV"
-        data-price="21999"
-      >
+      <!-- Product 6 – Realme Smart TV -->
+      <div class="product-card" data-category="smart budget"
+           data-name="Realme 40&quot; Full HD Smart TV"
+           data-price="21999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/realme-smart.jpeg" alt="Realme Smart TV">
+          </div>
           <h3 class="product-title">Realme 40&quot; Full HD Smart TV</h3>
           <p class="product-spec">Full HD • 40&quot; • Smart OS • 24W Speakers</p>
         </div>
@@ -650,15 +669,14 @@
         </div>
       </div>
 
-      <!-- Product 7 -->
-      <div
-        class="product-card"
-        data-category="4k oled"
-        data-name="Samsung 55&quot; QLED 4K Smart TV"
-        data-price="99999"
-      >
+      <!-- Product 7 – Samsung QLED -->
+      <div class="product-card" data-category="4k oled"
+           data-name="Samsung 55&quot; QLED 4K Smart TV"
+           data-price="99999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/samsung-qled.jpeg" alt="Samsung QLED 4K TV">
+          </div>
           <h3 class="product-title">Samsung 55&quot; QLED 4K Smart TV</h3>
           <p class="product-spec">QLED • 55&quot; • Quantum HDR • Gaming Mode</p>
         </div>
@@ -674,15 +692,14 @@
         </div>
       </div>
 
-      <!-- Product 8 -->
-      <div
-        class="product-card"
-        data-category="budget"
-        data-name="Vu 32&quot; Frameless HD Smart TV"
-        data-price="13999"
-      >
+      <!-- Product 8 – Vu Smart TV -->
+      <div class="product-card" data-category="budget"
+           data-name="Vu 32&quot; Frameless HD Smart TV"
+           data-price="13999">
         <div>
-          <div class="product-image"></div>
+          <div class="product-image">
+            <img src="images/vu-smart.jpeg" alt="Vu Smart TV">
+          </div>
           <h3 class="product-title">Vu 32&quot; Frameless HD Smart TV</h3>
           <p class="product-spec">HD • 32&quot; • Frameless • OTT Apps</p>
         </div>
@@ -697,6 +714,7 @@
           <button class="add-to-cart-btn">Add to Cart</button>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -736,7 +754,6 @@
     let cartCount = 0;
     let cartTotal = 0;
 
-    // Scroll helper
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) {
@@ -744,14 +761,12 @@
       }
     }
 
-    // Update cart UI
     function updateCartUI() {
       document.getElementById("cart-count").textContent = cartCount;
       document.getElementById("cart-items-text").textContent = cartCount;
       document.getElementById("cart-total").textContent = cartTotal.toLocaleString("en-IN");
     }
 
-    // Clear cart
     function clearCart() {
       cartCount = 0;
       cartTotal = 0;
@@ -759,7 +774,6 @@
       alert("Cart cleared.");
     }
 
-    // Checkout (demo only)
     function checkout() {
       if (cartCount === 0) {
         alert("Your cart is empty. Please add a TV first.");
@@ -774,7 +788,6 @@
       }
     }
 
-    // Handle Add to Cart buttons
     function initAddToCart() {
       const productCards = document.querySelectorAll(".product-card");
 
@@ -792,7 +805,6 @@
       });
     }
 
-    // Category filter
     function initCategories() {
       const pills = document.querySelectorAll(".category-pill");
       const cards = document.querySelectorAll(".product-card");
@@ -801,13 +813,11 @@
         pill.addEventListener("click", function () {
           const selected = pill.getAttribute("data-category");
 
-          // Active style
           pills.forEach(function (p) {
             p.classList.remove("active");
           });
           pill.classList.add("active");
 
-          // Filter
           cards.forEach(function (card) {
             const cat = card.getAttribute("data-category") || "";
             if (selected === "all" || cat.includes(selected)) {
@@ -820,13 +830,12 @@
       });
     }
 
-    // Set current year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Initialize page
     initAddToCart();
     initCategories();
     updateCartUI();
   </script>
 </body>
 </html>
+
