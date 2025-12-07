@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GalaxyTV Store – Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f5fb;
+      color: #111827;
+    }
+
+    header {
+      background: #111827;
+      color: #fff;
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #38bdf8;
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    main {
+      padding-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 15px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    /* Order table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    th, td {
+      padding: 8px 6px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .total-line {
+      margin-top: 10px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* Form */
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin: 10px 0 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row > div {
+      flex: 1;
+    }
+
+    .btn-primary {
+      margin-top: 16px;
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .highlight {
+      font-weight: 600;
+    }
+
+    #card-fields {
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container top-bar">
+      <div class="logo">Galaxy<span>TV</span> Store</div>
+      <a href="cart.html" class="back-link">← Back to Cart</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Payment</h1>
+    <p class="subtitle">
+      Review your order and enter your details to place the order.
+    </p>
+
+    <div class="two-column">
+      <!-- Left: Order summary -->
+      <div class="card">
+        <h2>Your Order</h2>
+        <div id="order-summary">
+          <!-- Table will be injected by JS -->
+        </div>
+      </div>
+
+      <!-- Right: Customer + payment form -->
+      <div class="card">
+        <h2>Customer & Payment Details</h2>
+
+        <form id="payment-form">
+          <label for="fullname">Full Name</label>
+          <input id="fullname" name="fullname" required placeholder="Your name" />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+
+          <div class="row">
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" required placeholder="10-digit number" />
+            </div>
+            <div>
+              <label for="pincode">Pincode</label>
+              <input id="pincode" name="pincode" required placeholder="600001" />
+            </div>
+          </div>
+
+          <label for="address">Address</label>
+          <textarea id="address" name="address" required placeholder="Flat / Street / Area / City"></textarea>
+
+          <label for="payment-method">Payment Method</label>
+          <select id="payment-method" name="paymentMethod" required>
+            <option value="card">Credit / Debit Card</option>
+            <option value="upi">UPI</option>
+            <option value="cod">Cash on Delivery</option>
+          </select>
+
+          <!-- Card details (shown only if method = card) -->
+          <div id="card-fields">
+            <label for="card-number">Card Number</label>
+            <input id="card-number" maxlength="16" placeholder="XXXX XXXX XXXX XXXX" />
+
+            <div class="row">
+              <div>
+                <label for="expiry">Expiry (MM/YY)</label>
+                <input id="expiry" maxlength="5" placeholder="12/29" />
+              </div>
+              <div>
+                <label for="cvv">CVV</label>
+                <input id="cvv" maxlength="3" placeholder="123" />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Pay & Place Order
+          </button>
+
+          <p class="note">
+            This is a demo payment page (no real money will be taken).
+          </p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ---------- CART DATA FROM LOCALSTORAGE ----------
+    function loadCartFromStorage() {
+      const itemsStr = localStorage.getItem("cartItems");
+      const totalStr = localStorage.getItem("cartTotal");
+      const countStr = localStorage.getItem("cartCount");
+
+      const items = itemsStr ? JSON.parse(itemsStr) : [];
+      const total = totalStr ? Number(totalStr) : 0;
+      const count = countStr ? Number(countStr) : 0;
+
+      return { items, total, count };
+    }
+
+    // ---------- SHOW ORDER SUMMARY ----------
+    function renderOrderSummary() {
+      const { items, total, count } = loadCartFromStorage();
+      const wrapper = document.getElementById("order-summary");
+
+      if (!items.length) {
+        wrapper.innerHTML = "<p>Your cart is empty. Go back and add a TV.</p>";
+        return;
+      }
+
+      let rows = "";
+      items.forEach(item => {
+        const subtotal = item.price * item.qty;
+        rows += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.qty}</td>
+            <td>₹${item.price.toLocaleString("en-IN")}</td>
+            <td>₹${subtotal.toLocaleString("en-IN")}</td>
+          </tr>
+        `;
+      });
+
+      wrapper.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+        <p class="total-line">
+          Items: <span class="highlight">${count}</span> &nbsp; | &nbsp;
+          Total: <span class="highlight">₹${total.toLocaleString("en-IN")}</span>
+        </p>
+      `;
+    }
+
+    // ---------- PAYMENT METHOD TOGGLE ----------
+    const methodSelect = document.getElementById("payment-method");
+    const cardFields = document.getElementById("card-fields");
+
+    function updateCardFieldsVisibility() {
+      if (methodSelect.value === "card") {
+        cardFields.style.display = "block";
+      } else {
+        cardFields.style.display = "none";
+      }
+    }
+
+    methodSelect.addEventListener("change", updateCardFieldsVisibility);
+
+    // ---------- HANDLE PAY & PLACE ORDER ----------
+    document.getElementById("payment-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const { items, total, count } = loadCartFromStorage();
+      if (!items.length) {
+        alert("Your cart is empty. Go back and add a TV first.");
+        window.location.href = "TV-shop.html";
+        return;
+      }
+
+      const customer = {
+        fullname: document.getElementById("fullname").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        pincode: document.getElementById("pincode").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        paymentMethod: document.getElementById("payment-method").value
+      };
+
+      const order = {
+        customer,
+        cart: {
+          items,
+          total,
+          count
+        }
+      };
+
+      try {
+        // send to backend (your /api/checkout)
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(order)
+        });
+
+        const data = await res.json();
+        console.log("Checkout response:", data);
+
+        alert(
+          "Order placed successfully! 🎉\n\n" +
+          "Name: " + customer.fullname + "\n" +
+          "Items: " + count + "\n" +
+          "Total: ₹" + total.toLocaleString("en-IN")
+        );
+
+        // clear cart
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("cartTotal");
+        localStorage.removeItem("cartCount");
+
+        // go back to main shop
+        window.location.href = "TV-shop.html";
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong while placing the order. Please try again.");
+      }
+    });
+
+    // ---------- INIT ----------
+    renderOrderSummary();
+    updateCardFieldsVisibility();
+  </script>
+</body>
+</html>

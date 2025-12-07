@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galaxy TV Store - Online Television Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5fb;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header / Navbar */
+    header {
+      background: #111827;
+      color: #fff;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #38bdf8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(148, 163, 184, 0.3);
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      background: #0f172a;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      background: #22c55e;
+      color: #0f172a;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #fff;
+      padding: 40px 0 60px 0;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+      color: #cbd5f5;
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .btn-primary {
+      background: #22c55e;
+      color: #0f172a;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.8);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .hero-image-box {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    /* HERO TV IMAGE */
+    .hero-tv-screen {
+      height: 260px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+      position: relative;
+      background: #020617;
+    }
+
+    .hero-tv-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-tv-screen::after {
+      content: "4K ULTRA HD";
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-tv-stand {
+      width: 75%;
+      height: 8px;
+      background: #020617;
+      margin: 16px auto 0 auto;
+      border-radius: 999px;
+    }
+
+    /* Category pills */
+    .categories {
+      margin: 30px auto 15px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .category-pill {
+      padding: 6px 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .category-pill.active,
+    .category-pill:hover {
+      background: #dbeafe;
+      border-color: #3b82f6;
+    }
+
+    /* Product grid */
+    .section-title {
+      margin: 25px 0 10px 0;
+      font-size: 1.4rem;
+    }
+
+    .section-subtitle {
+      color: #6b7280;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 15px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.15);
+    }
+
+    .product-image {
+      background: #111;
+      height: 120px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image::after {
+      content: "TV";
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .product-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .product-spec {
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .product-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .product-old-price {
+      font-size: 0.8rem;
+      text-decoration: line-through;
+      color: #9ca3af;
+    }
+
+    .product-tag {
+      font-size: 0.75rem;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+
+    .add-to-cart-btn {
+      margin-top: 8px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 999px;
+      border: none;
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+    }
+
+    .add-to-cart-btn:hover {
+      background: #1e40af;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #9ca3af;
+      padding: 20px 0;
+      font-size: 0.85rem;
+      margin-top: 20px;
+    }
+
+    footer .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer a {
+      color: #e5e7eb;
+      font-size: 0.82rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-bottom: 40px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        Galaxy<span>TV</span> Store
+      </div>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#tvs">Televisions</a>
+        <a href="#offers">Offers</a>
+        <a href="cart.html">Cart</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- Cart button → cart.html -->
+      <a href="cart.html" class="cart">
+        🛒 Cart
+        <span class="cart-count" id="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div>
+        <h1 class="hero-title">Upgrade Your Living Room with Stunning 4K Televisions</h1>
+        <p class="hero-subtitle">
+          Explore Smart TVs from top brands with crystal clear 4K UHD, Dolby Atmos sound, and
+          bezel-less designs — all at festival-ready prices.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">🎉 Festival Offers Live</span>
+          <span class="badge">🚚 Free Delivery in 48 hrs</span>
+          <span class="badge">🛡️ 2–3 Year Warranty</span>
+        </div>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('tvs')">
+            Shop Televisions
+          </button>
+          <button class="btn btn-outline" onclick="scrollToSection('offers')">
+            View Latest Deals
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-image-box">
+        <div class="hero-tv-screen">
+          <img src="images/hero-tv.jpeg" alt="4K Ultra HD Television">
+        </div>
+        <div class="hero-tv-stand"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="container" id="tvs">
+    <div class="categories">
+      <button class="category-pill active" data-category="all">All TVs</button>
+      <button class="category-pill" data-category="4k">4K Ultra HD</button>
+      <button class="category-pill" data-category="smart">Smart TVs</button>
+      <button class="category-pill" data-category="oled">OLED / QLED</button>
+      <button class="category-pill" data-category="budget">Budget Friendly</button>
+    </div>
+
+    <h2 class="section-title">Featured Televisions</h2>
+    <p class="section-subtitle">
+      Carefully selected TVs with the best balance of price, performance, and features.
+    </p>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-grid">
+
+      <!-- Product 1 – Samsung 4K -->
+      <div class="product-card"
+           data-id="1"
+           data-category="4k smart"
+           data-name="Samsung 55&quot; Crystal 4K UHD Smart TV"
+           data-price="54999">
+        <div>
+          <a href="product.html?id=1">
+            <div class="product-image">
+              <img src="images/samsung-4k.jpeg" alt="Samsung 4K TV">
+            </div>
+            <h3 class="product-title">Samsung 55&quot; Crystal 4K UHD Smart TV</h3>
+          </a>
+          <p class="product-spec">4K UHD • 55&quot; • Tizen OS • 3 HDMI</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹54,999</span>
+              <span class="product-old-price">₹69,999</span>
+            </div>
+            <span class="product-tag">15% OFF</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 2 – LG OLED -->
+      <div class="product-card"
+           data-id="2"
+           data-category="4k smart oled"
+           data-name="LG 65&quot; 4K OLED evo Smart TV"
+           data-price="129999">
+        <div>
+          <a href="product.html?id=2">
+            <div class="product-image">
+              <img src="images/lg-oled.jpeg" alt="LG OLED TV">
+            </div>
+            <h3 class="product-title">LG 65&quot; 4K OLED evo Smart TV</h3>
+          </a>
+          <p class="product-spec">OLED • 65&quot; • webOS • Dolby Vision &amp; Atmos</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹1,29,999</span>
+              <span class="product-old-price">₹1,59,999</span>
+            </div>
+            <span class="product-tag">Bank Offer</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 3 – Xiaomi Smart TV -->
+      <div class="product-card"
+           data-id="3"
+           data-category="smart budget"
+           data-name="Xiaomi 43&quot; Full HD Android Smart TV"
+           data-price="24999">
+        <div>
+          <a href="product.html?id=3">
+            <div class="product-image">
+              <img src="images/xiaomi-android.jpeg" alt="Xiaomi Android TV">
+            </div>
+            <h3 class="product-title">Xiaomi 43&quot; Full HD Android Smart TV</h3>
+          </a>
+          <p class="product-spec">Full HD • 43&quot; • Android TV • Chromecast</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹24,999</span>
+              <span class="product-old-price">₹29,999</span>
+            </div>
+            <span class="product-tag">Best Seller</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 4 – OnePlus LED -->
+      <div class="product-card"
+           data-id="4"
+           data-category="budget"
+           data-name="OnePlus 32&quot; HD Ready LED TV"
+           data-price="15999">
+        <div>
+          <a href="product.html?id=4">
+            <div class="product-image">
+              <img src="images/oneplus-led.jpeg" alt="OnePlus LED TV">
+            </div>
+            <h3 class="product-title">OnePlus 32&quot; HD Ready LED TV</h3>
+          </a>
+          <p class="product-spec">HD Ready • 32&quot; • Bezel-less • 20W Speakers</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹15,999</span>
+              <span class="product-old-price">₹19,999</span>
+            </div>
+            <span class="product-tag">Value Pick</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 5 – Sony Google TV -->
+      <div class="product-card"
+           data-id="5"
+           data-category="4k smart"
+           data-name="Sony 50&quot; 4K HDR Google TV"
+           data-price="77999">
+        <div>
+          <a href="product.html?id=5">
+            <div class="product-image">
+              <img src="images/sony-google.jpeg" alt="Sony 4K Google TV">
+            </div>
+            <h3 class="product-title">Sony 50&quot; 4K HDR Google TV</h3>
+          </a>
+          <p class="product-spec">4K HDR • 50&quot; • Google TV • X1 Processor</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹77,999</span>
+              <span class="product-old-price">₹89,999</span>
+            </div>
+            <span class="product-tag">Premium</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 6 – Realme Smart TV -->
+      <div class="product-card"
+           data-id="6"
+           data-category="smart budget"
+           data-name="Realme 40&quot; Full HD Smart TV"
+           data-price="21999">
+        <div>
+          <a href="product.html?id=6">
+            <div class="product-image">
+              <img src="images/realme-smart.jpeg" alt="Realme Smart TV">
+            </div>
+            <h3 class="product-title">Realme 40&quot; Full HD Smart TV</h3>
+          </a>
+          <p class="product-spec">Full HD • 40&quot; • Smart OS • 24W Speakers</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹21,999</span>
+              <span class="product-old-price">₹26,999</span>
+            </div>
+            <span class="product-tag">Hot Deal</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 7 – Samsung QLED -->
+      <div class="product-card"
+           data-id="7"
+           data-category="4k oled"
+           data-name="Samsung 55&quot; QLED 4K Smart TV"
+           data-price="99999">
+        <div>
+          <a href="product.html?id=7">
+            <div class="product-image">
+              <img src="images/samsung-qled.jpeg" alt="Samsung QLED 4K TV">
+            </div>
+            <h3 class="product-title">Samsung 55&quot; QLED 4K Smart TV</h3>
+          </a>
+          <p class="product-spec">QLED • 55&quot; • Quantum HDR • Gaming Mode</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹99,999</span>
+              <span class="product-old-price">₹1,19,999</span>
+            </div>
+            <span class="product-tag">New Arrival</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 8 – Vu Smart TV -->
+      <div class="product-card"
+           data-id="8"
+           data-category="budget"
+           data-name="Vu 32&quot; Frameless HD Smart TV"
+           data-price="13999">
+        <div>
+          <a href="product.html?id=8">
+            <div class="product-image">
+              <img src="images/vu-smart.jpeg" alt="Vu Smart TV">
+            </div>
+            <h3 class="product-title">Vu 32&quot; Frameless HD Smart TV</h3>
+          </a>
+          <p class="product-spec">HD • 32&quot; • Frameless • OTT Apps</p>
+        </div>
+        <div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹13,999</span>
+              <span class="product-old-price">₹17,999</span>
+            </div>
+            <span class="product-tag">Budget Star</span>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Offers section (no cart summary now) -->
+  <section class="container" id="offers">
+    <h2 class="section-title">Festival Offers</h2>
+    <p class="section-subtitle">
+      Bank cashback, no-cost EMI and exchange offers are available on select models.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container footer-row">
+      <div>
+        © <span id="year"></span> GalaxyTV Store. All rights reserved.
+      </div>
+      <div>
+        📍 123, Main Market Road, Your City &nbsp;|&nbsp;
+        📞 +91-98765 43210 &nbsp;|&nbsp;
+        ✉️ <a href="mailto:support@galaxytvstore.com">support@galaxytvstore.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    let cartCount = 0;
+    let cartTotal = 0;
+    let cartItems = []; // { id, name, price, qty }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function saveCartToStorage() {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("cartTotal", String(cartTotal));
+      localStorage.setItem("cartCount", String(cartCount));
+    }
+
+    function loadCartFromStorage() {
+      const itemsStr = localStorage.getItem("cartItems");
+      const totalStr = localStorage.getItem("cartTotal");
+      const countStr = localStorage.getItem("cartCount");
+
+      cartItems = itemsStr ? JSON.parse(itemsStr) : [];
+      cartTotal = totalStr ? Number(totalStr) : 0;
+      cartCount = countStr ? Number(countStr) : 0;
+    }
+
+    function updateCartUI() {
+      const headerCount = document.getElementById("cart-count");
+      if (headerCount) headerCount.textContent = cartCount;
+
+      // only used if you add a summary somewhere
+      const itemsText = document.getElementById("cart-items-text");
+      const totalSpan = document.getElementById("cart-total");
+      if (itemsText) itemsText.textContent = cartCount;
+      if (totalSpan) totalSpan.textContent = cartTotal.toLocaleString("en-IN");
+
+      saveCartToStorage();
+    }
+
+    function clearCart() {
+      cartCount = 0;
+      cartTotal = 0;
+      cartItems = [];
+      updateCartUI();
+      alert("Cart cleared.");
+    }
+
+    function checkout() {
+      if (cartCount === 0) {
+        alert("Your cart is empty. Please add a TV first.");
+      } else {
+        alert(
+          "Thank you for shopping with GalaxyTV Store! This is a demo checkout. You added " +
+            cartCount +
+            " item(s) worth ₹" +
+            cartTotal.toLocaleString("en-IN") +
+            "."
+        );
+      }
+    }
+
+    function initAddToCart() {
+      const productCards = document.querySelectorAll(".product-card");
+
+      productCards.forEach(function (card) {
+        const btn = card.querySelector(".add-to-cart-btn");
+        const price = Number(card.getAttribute("data-price") || "0");
+        const name = card.getAttribute("data-name") || "Television";
+        const id = Number(card.getAttribute("data-id") || "0");
+
+        btn.addEventListener("click", function () {
+          cartCount += 1;
+          cartTotal += price;
+
+          const existing = cartItems.find(item => item.id === id);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            cartItems.push({ id, name, price, qty: 1 });
+          }
+
+          updateCartUI();
+          alert(name + " added to cart!");
+        });
+      });
+    }
+
+    function initCategories() {
+      const pills = document.querySelectorAll(".category-pill");
+      const cards = document.querySelectorAll(".product-card");
+
+      pills.forEach(function (pill) {
+        pill.addEventListener("click", function () {
+          const selected = pill.getAttribute("data-category");
+
+          pills.forEach(function (p) {
+            p.classList.remove("active");
+          });
+          pill.classList.add("active");
+
+          cards.forEach(function (card) {
+            const cat = card.getAttribute("data-category") || "";
+            if (selected === "all" || cat.includes(selected)) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // init
+    loadCartFromStorage();
+    initAddToCart();
+    initCategories();
+    updateCartUI();
+  </script>
+</body>
+</html>

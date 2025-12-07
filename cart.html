@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart - Galaxy TV Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5fb;
+      color: #111827;
+      margin: 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      background: #111827;
+      color: #fff;
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .back-link {
+      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #1f2937;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .cart-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 8px 6px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+    th {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .total-row {
+      text-align: right;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    .btn-primary {
+      background: #1d4ed8;
+      color: #fff;
+    }
+    .btn-outline {
+      background: transparent;
+      color: #111827;
+      border: 1px solid #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div>
+        <strong>GalaxyTV Store</strong>
+      </div>
+      <a href="TV-shop.html" class="back-link">⬅ Back to Shop</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Your Cart</h1>
+    <p id="cart-summary-text"></p>
+
+    <div class="cart-box" id="cart-box">
+      <!-- table will be injected here -->
+    </div>
+
+    <button class="btn btn-outline" onclick="clearCart()">Clear Cart</button>
+    <button class="btn btn-primary" onclick="proceedToCheckout()">Proceed to Checkout</button>
+  </div>
+
+  <script>
+    let cartItems = [];
+    let cartTotal = 0;
+    let cartCount = 0;
+
+    function loadCartFromStorage() {
+      cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      cartTotal = Number(localStorage.getItem("cartTotal") || 0);
+      cartCount = Number(localStorage.getItem("cartCount") || 0);
+    }
+
+    function saveCartToStorage() {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("cartTotal", cartTotal);
+      localStorage.setItem("cartCount", cartCount);
+    }
+
+    function renderCart() {
+      const box = document.getElementById("cart-box");
+      const summary = document.getElementById("cart-summary-text");
+
+      if (cartItems.length === 0) {
+        summary.textContent = "Your cart is empty.";
+        box.innerHTML = "<p>No items to show.</p>";
+        return;
+      }
+
+      summary.textContent =
+        "You have " + cartCount + " item(s) worth ₹" +
+        cartTotal.toLocaleString("en-IN") + " in your cart.";
+
+      let rows = "";
+      cartItems.forEach(item => {
+        const subtotal = item.price * item.qty;
+
+        rows += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.qty}</td>
+            <td>₹${item.price.toLocaleString("en-IN")}</td>
+            <td>₹${subtotal.toLocaleString("en-IN")}</td>
+          </tr>
+        `;
+      });
+
+      box.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+
+        <div class="total-row">
+          Total: ₹${cartTotal.toLocaleString("en-IN")}
+        </div>
+      `;
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cartTotal");
+      localStorage.removeItem("cartCount");
+
+      loadCartFromStorage();
+      renderCart();
+
+      alert("Cart cleared.");
+    }
+
+    // ⭐ FINAL: Proceed to Checkout → open payment.html
+    function proceedToCheckout() {
+      if (cartCount === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      // save latest cart data
+      saveCartToStorage();
+
+      // open payment page
+      window.location.href = "payment.html";
+    }
+
+    // init
+    loadCartFromStorage();
+    renderCart();
+  </script>
+</body>
+</html>
