@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Details - Galaxy TV Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5fb;
+      margin: 0;
+      color: #111827;
+    }
+
+    header {
+      background: #111827;
+      padding: 15px 0;
+      color: white;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      background: #1f2937;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .product-box {
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 20px;
+    }
+
+    .product-box img {
+      width: 380px;
+      border-radius: 12px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      margin-bottom: 10px;
+    }
+
+    .price-row {
+      margin: 10px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: gray;
+      margin-left: 8px;
+      font-size: 0.9rem;
+    }
+
+    .tag {
+      background: #dcfce7;
+      color: #16a34a;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .btn {
+      background: #1d4ed8;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="TV-shop.html" class="back-btn">⬅ Back to Shop</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="product-box" id="product-box">
+    <!-- JS will fill product details here -->
+  </div>
+</div>
+
+<script>
+  const productData = localStorage.getItem("selectedProduct");
+
+  if (!productData) {
+    document.getElementById("product-box").innerHTML =
+      "<p>Product not found. Please go back.</p>";
+  } else {
+    const product = JSON.parse(productData);
+
+    document.getElementById("product-box").innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <div class="details">
+        <h2>${product.name}</h2>
+
+        <p>${product.spec}</p>
+
+        <div class="price-row">
+          ₹${product.price.toLocaleString("en-IN")}
+          <span class="old-price">${product.oldPriceText || ""}</span>
+        </div>
+
+        <span class="tag">${product.tag || ""}</span>
+
+        <button class="btn" onclick="addToCart()">Add to Cart</button>
+      </div>
+    `;
+  }
+
+  function addToCart() {
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+    let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    let cartCount = Number(localStorage.getItem("cartCount") || 0);
+    let cartTotal = Number(localStorage.getItem("cartTotal") || 0);
+
+    // Add to cart
+    cartCount += 1;
+    cartTotal += product.price;
+
+    const existing = cartItems.find(item => item.name === product.name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cartItems.push({
+        name: product.name,
+        price: product.price,
+        qty: 1
+      });
+    }
+
+    // Save cart
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("cartCount", cartCount);
+    localStorage.setItem("cartTotal", cartTotal);
+
+    alert("Added to Cart!");
+  }
+</script>
+
+</body>
+</html>
